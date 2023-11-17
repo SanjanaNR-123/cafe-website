@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: flex-start; /* Updated property */
+            align-items: flex-start; /* Updated property */
+            height: 100vh;
+        }
+
+        .reservation-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            margin-bottom: 16px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <title>Cafe Reservation</title>
+</head>
+<body>
+    <div class="container">
+        <form id="reservationForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" required>
+
+            <label for="time">Time:</label>
+            <input type="time" id="time" required>
+
+            <label for="phoneNo">Phone no:</label> <!-- Updated ID and label -->
+            <input type="tel" id="phoneNo" required> <!-- Updated type attribute -->
+
+            <label for="people">Number of People:</label>
+            <input type="number" id="people" required>
+
+            <button type="button" onclick="submitForm()">Submit Reservation</button>
+        </form>
+
+        <div id="thanksMessage" class="hidden">
+            <p>Thanks for your reservation!</p>
+        </div>
+    </div>
+
+    <script>
+        function submitForm() {
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const phoneNo = document.getElementById('phoneNo').value;
+            const people = document.getElementById('people').value;
+    
+            // Check if any of the required fields are empty
+            if (!name) {
+                alert('Please fill in the Name field.');
+                return;
+            }
+    
+            if (!email) {
+                alert('Please fill in the Email field.');
+                return;
+            }
+    
+            if (!date) {
+                alert('Please fill in the Date field.');
+                return;
+            }
+    
+            if (!time) {
+                alert('Please fill in the Time field.');
+                return;
+            }
+    
+            if (!phoneNo) {
+                alert('Please fill in the Phone No field.');
+                return;
+            }
+    
+            if (!people) {
+                alert('Please fill in the Number of People field.');
+                return;
+            }
+    
+            // Display thanks message
+            document.getElementById('reservationForm').style.display = 'none';
+            const thanksMessage = document.getElementById('thanksMessage');
+            thanksMessage.style.display = 'block';
+        }
+    </script>
+    
+</body>
+</html>

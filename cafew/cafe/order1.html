@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .order-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%; /* Adjusted to be more flexible */
+            max-width: 1200px; /* Added max-width for responsiveness */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            margin-bottom: 16px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"] {
+            margin-right: 6px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #orderList {
+            margin-top: 20px;
+        }
+
+        .order-item {
+            margin-bottom: 10px;
+        }
+
+        .order-price {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+    <title>Cafe Order Form</title>
+</head>
+<body>
+    <div class="menu">
+        <img src="order.png" alt="Example Image" width="700" height="800">
+    </div>
+    <div class="order-container">
+        
+        <form id="orderForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            <label for="address">Address:</label>
+            <input type="text" id="address" required>
+
+            <label for="drink">Select a Drink:</label>
+            <select id="drink" required>
+                <option value="espresso">espresso</option>
+                <option value="latte">latte</option>
+                <option value="cappuccino">cappuccino</option>
+                <option value="croissant">croissant</option>
+                <option value="pizza-cup">pizza cup</option>
+                <option value="chocolate-coffee-pudding">chocolate coffee pudding</option>
+            </select>
+
+            <label>Select Size:</label>
+            <div>
+                <input type="radio" id="small" name="size" value="small" checked>
+                <label for="small">Small</label>
+            </div>
+            <div>
+                <input type="radio" id="medium" name="size" value="medium">
+                <label for="medium">Medium</label>
+            </div>
+            <div>
+                <input type="radio" id="large" name="size" value="large">
+                <label for="large">Large</label>
+            </div>
+
+            <label for="extras">Extras (optional):</label>
+            <input type="text" id="extras">
+
+            <button type="button" onclick="addItem()">Add Item</button>
+
+            <div id="orderList"></div>
+
+            <div id="orderDetails" class="order-price"></div>
+
+            <button type="button" onclick="submitOrder()">Place Order</button>
+        </form>
+    </div>
+
+    <script>
+        // Prices for each item
+        const itemPrices = {
+            espresso: 200,
+            latte: 180,
+            cappuccino: 190,
+            croissant: 150,
+            'pizza-cup': 150,
+            'chocolate-coffee-pudding': 100,
+        };
+
+        function addItem() {
+            var name = document.getElementById('name').value;
+            var address = document.getElementById('address').value;
+            var drink = document.getElementById('drink').value;
+            var size = document.querySelector('input[name="size"]:checked').value;
+            var extras = document.getElementById('extras').value;
+
+            // Calculate the price based on the selected item
+            var price = itemPrices[drink.toLowerCase()];
+
+            var orderItem = document.createElement('div');
+            orderItem.className = 'order-item';
+            orderItem.innerHTML = '<strong>Name:</strong> ' + name + '<br>' +
+                                '<strong>Address:</strong> ' + address + '<br>' +
+                                '<strong>Item:</strong> ' + name + '<br>' +
+                                '<strong>Drink:</strong> ' + drink + '<br>' +
+                                '<strong>Size:</strong> ' + size + '<br>' +
+                                '<strong>Extras:</strong> ' + extras + '<br>' +
+                                '<strong>Price:</strong> $' + price + '<br>';
+
+            document.getElementById('orderList').appendChild(orderItem);
+
+            // Update the total order price
+            updateOrderDetails();
+
+            // Clear the form fields after adding an item
+            document.getElementById('name').value = '';
+            document.getElementById('address').value = '';
+            document.getElementById('drink').value = 'espresso';
+            document.getElementById('small').checked = true;
+            document.getElementById('extras').value = '';
+        }
+
+        function updateOrderDetails() {
+            var orderItems = document.querySelectorAll('.order-item');
+            var totalPrice = 0;
+
+            orderItems.forEach(function(item) {
+                var drink = item.innerText.match(/Drink: (.*)/)[1].trim().toLowerCase();
+                totalPrice += itemPrices[drink];
+            });
+
+            document.getElementById('orderDetails').innerHTML = '<strong>Total Order Price:</strong> $' + totalPrice;
+        }
+
+        function submitOrder() {
+            var orderItems = document.querySelectorAll('.order-item');
+            if (orderItems.length === 0) {
+                alert('Please add items to your order.');
+                return;
+            }
+
+            var orderDetails = '';
+            orderItems.forEach(function(item, index) {
+                var itemText = item.innerText.trim(); // Extract text content without HTML tags
+                orderDetails += 'Item ' + (index + 1) + ': ' + itemText + '\n';
+            });
+
+            var totalOrderPrice = document.getElementById('orderDetails').textContent;
+
+            alert('Order placed!\n\n' + orderDetails + '\n' + totalOrderPrice);
+
+            // Clear the order list and price after submitting the order
+            document.getElementById('orderList').innerHTML = '';
+            document.getElementById('orderDetails').innerHTML = '';
+        }
+    </script>
+</body>
+</html>

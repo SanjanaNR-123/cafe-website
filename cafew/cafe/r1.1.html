@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #visitors {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+            flex-direction: column;
+            background-color: #ffeaea;
+        }
+    </style>
+</head>
+<body>
+    <!-- Number of visitors -->
+    <section id="visitors">
+        <h1>Welcome to IntelliCafe</h1>
+        <p>Visitor Count: <span id="visitorCount">0</span></p>
+    </section>
+
+    <script>
+        // Number of visitors functions
+        function incrementVisitorCount() {
+            if (localStorage.getItem('visitorCount') === null) {
+                localStorage.setItem('visitorCount', 1);
+            } else {
+                let count = parseInt(localStorage.getItem('visitorCount'));
+                count++;
+                localStorage.setItem('visitorCount', count);
+            }
+
+            // Update the visitor count
+            updateVisitorCount();
+        }
+
+        function updateVisitorCount() {
+            let count = localStorage.getItem('visitorCount') || 0;
+            document.getElementById('visitorCount').textContent = count;
+        }
+
+        // Increment the visitor count on page load
+        incrementVisitorCount();
+    </script>
+</body>
+</html>

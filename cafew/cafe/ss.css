@@ -1,0 +1,114 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
+#greeting{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+nav {
+    background-color: #333;
+    overflow: hidden;
+    width: 100%;
+    position: unset;
+    z-index: 1000;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#bar{
+    padding: 10px 10px 0px 30px;
+    color:burlywood;
+    font-size: 25px;
+}
+
+h4,h5{
+    color: rgb(253, 142, 7);
+}
+h2{ color:rgb(255, 255, 255);}
+
+h1{
+    text-align: center;
+}
+pre{
+    color:rgb(255, 255, 255);
+    padding-left: 30%;
+    font-size: 17px;
+}
+#About{
+    background-color: rgb(37, 23, 23);
+}
+h6{
+    color: white;
+    padding-left: 20px;
+    font-size: 25px;
+    font-weight: lighter;
+}
+nav li {
+    float: left;  
+}
+#home{
+    background-image: url(cup.jpg);
+    background-repeat: no-repeat;
+    background-size:100vw 100vh;
+}
+nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 26px;
+    text-decoration: none;
+    font-size: 20px;
+}#price{
+    font-weight: bold;
+}
+#feedback{
+    background-color:rgb(248, 230, 207);
+    border: 1px black;
+}
+#contactform label{
+    padding-left: 20px;
+    font-weight: bold;
+}
+#conform{
+    margin: 30px;
+}
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+.menu-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.menu-item {
+    text-align: center;
+    margin: 20px;
+    padding: 10px;
+    width: 300px;
+}
+.menu-item img {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+#menu{
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#Contact details {
+    background-color: #ffffff;
+    color: black;
+}
+footer ,#contact{
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 10px 0;
+    bottom: 0;
+    width: 100%;
+  }
